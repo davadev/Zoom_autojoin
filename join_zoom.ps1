@@ -61,12 +61,13 @@ $run_on_win_login=$args[0]
     if ($run_on_win_login -eq 1)
     {
         while((get-process "msedge" -ea SilentlyContinue) -eq $Null){ 
-       	 	echo "Warten auf USB Internet Initializierung." 
+       	 	echo "Waiting for USB Modem initialization. (Open Web configuration Interface)" 
         sleep 1
         }
         Stop-Process -Name "msedge"
     }
 ##====================================================avoid already started keepass or zoom===================================================================
+## Keepass and zomm will be killed (if running) in order to start them in the correct order    
     if((get-process "Keepass" -ea SilentlyContinue) -ne $Null){ 
         Stop-Process -Name "Keepass"
     }
@@ -93,6 +94,7 @@ $run_on_win_login=$args[0]
 ## Start zoom and wait for GUI to appaer
     Start-Process -FilePath "C:\Users\User\AppData\Roaming\Zoom\bin\Zoom.exe" 
     sleep 8 #waiting at least 8 seconds is necessary as it takes some time for zoom to lunch the GUI
+## !!! Adjust the path to reflect your username !!!
 
 ##====================================================Keepass autofill activation===============================================================================
 
