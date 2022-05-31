@@ -1,8 +1,8 @@
 ##=============================================================================================================================================================
 ## Author: daniel.vavrik@yahoo.com
-## Version: 1.21 Beta
+## Version: 1.22 
 ## Compatibility: windows 10, windows 11
-## Last Update: 10.01.2022 06:55
+## Last Update: 31.05.2022 06:10
 ## Purpose: This scripts automatize login into zoom Meeting for those who are less technically able, or simpy want automatize it.
 ##          With this script you only need to press power button and within few seconds you will be automatically joined in zoom meeting.
 ##
@@ -21,7 +21,9 @@
 ##                        -> disable keepass check for update
 ##                        -> Create a keepass entry; username shoulf be "Meeting ID" and password "Meeting password"
 ##                        -> add custome autotype sequence:
-##                        -> {TAB}{ENTER}{DELAY 4500}{USERNAME}{TAB}{TAB}{CLEARFIELD}MyName{ENTER}{DELAY 3500}{PASSWORD}{ENTER}{DELAY 1500}{ENTER}  
+##                        -> {TAB}{ENTER}{DELAY 4500}{USERNAME}{TAB}{TAB}{CLEARFIELD}MyName{ENTER}{DELAY 3500}{PASSWORD}{ENTER}{DELAY 1500}{ENTER} 
+##                        -> Select the right app window (Zoom Cloud Meetings) where the autotype should be performed. (Be aware with zoom Update 
+##                           the window Name might change which will result in Autotype not working any more)
 ##                        -> set autotype shortcut in Keepass options to "alt + n"  
 ##
 ##               winget -> to use powershell packate manager you must install/update App-Installer via Windows Store (this is necessary for zoom autoupdates)
@@ -100,4 +102,4 @@ $run_on_win_login=$args[0]
 
 ## start keepass autotype sequence (alt + N)
     [void][System.Reflection.Assembly]::LoadWithPartialName('System.Windows.Forms') 
-    [System.Windows.Forms.SendKeys]
+    [System.Windows.Forms.SendKeys]::SendWait("%{n}") 
